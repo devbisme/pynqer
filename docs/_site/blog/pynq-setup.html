@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<title>PYNQ SETUP &vert; PYNQER</title>
+<meta name="description" content="To work with PYNQ in an unskilled or experimental manner.">
+<meta name="keywords" content="">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xesscorp.github.io/pynqer/docs/_site/images/logo.png">
+<meta name="twitter:title" content="PYNQ Setup">
+<meta name="twitter:description" content="To work with PYNQ in an unskilled or experimental manner.">
+<meta name="twitter:creator" content="@xesscorp">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PYNQ Setup">
+<meta property="og:description" content="To work with PYNQ in an unskilled or experimental manner.">
+<meta property="og:url" content="https://xesscorp.github.io/pynqer/docs/_site/blog/pynq-setup">
+<meta property="og:site_name" content="PYNQer">
+<meta property="og:image" content="https://xesscorp.github.io/pynqer/docs/_site/images/">
+
+
+
+
+
+<link rel="canonical" href="https://xesscorp.github.io/pynqer/docs/_site/blog/pynq-setup">
+<link href="https://xesscorp.github.io/pynqer/docs/_site/feed.xml" type="application/atom+xml" rel="alternate" title="PYNQer Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,600,300,800,700' rel='stylesheet' type='text/css'>
+	<!-- <link rel="stylesheet" href="https://xesscorp.github.io/pynqer/docs/_site/assets/css/vendor/font-awesome.min.css"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://xesscorp.github.io/pynqer/docs/_site/assets/css/vendor/normalize.css">
+    <link rel="stylesheet" href="https://xesscorp.github.io/pynqer/docs/_site/assets/css/vendor/nprogress.css">
+    <link rel="stylesheet" href="https://xesscorp.github.io/pynqer/docs/_site/assets/css/vendor/foundation.min.css">
+    <link rel="stylesheet" href="https://xesscorp.github.io/pynqer/docs/_site/assets/css/style.css">
+    <link rel="stylesheet" href="https://xesscorp.github.io/pynqer/docs/_site/assets/css/post.css">
+
+
+
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://xesscorp.github.io/pynqer/docs/_site/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://xesscorp.github.io/pynqer/docs/_site/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://xesscorp.github.io/pynqer/docs/_site/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://xesscorp.github.io/pynqer/docs/_site/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://xesscorp.github.io/pynqer/docs/_site/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://xesscorp.github.io/pynqer/docs/_site/images/apple-touch-icon-144x144-precomposed.png">
+
+        
+            <style type="text/css">@media only screen and (min-width:43.75em){.notepad-post-content div>p:first-child:first-letter{float:left;font-size:4.688rem;line-height:4.375rem;padding-top:.25rem;padding-right:.5rem;padding-left:.188rem;font-family:serif}}</style>
+        
+    </head>
+    <body class="post-template" itemscope itemtype="http://schema.org/WebPage">
+        
+            <main id="notepad-post-container-simple" class="notepad-post-container-simple" role="main">
+                <header class="notepad-post-header-simple">
+                    <div class="notepad-post-menu-header-simple">
+                        
+                        <a class="notepad-blog-logo" href="https://xesscorp.github.io/pynqer/docs/_site">
+                        <img src="https://xesscorp.github.io/pynqer/docs/_site/images/logo.png" alt="Blog Logo" />
+                        </a>
+                        <div class="notepad-blog-menu">
+                            <div class="notepad-mobile-menu show-for-small">
+                                <a href="#"><i class="fa fa-bars"></i></a>
+                            </div>
+                            <ul class="notepad-menu">
+                                <li class="notepad-mobile-close-btn show-for-small text-right">
+                                    <a href="#"><i class="fa fa-times"></i></a>
+                                </li>
+                                
+                                <li>
+                                    <a href="https://xesscorp.github.io/pynqer/docs/_site/">Home</a>
+                                     
+                                </li>
+                                
+                                <li>
+                                    <a href="https://xesscorp.github.io/pynqer/docs/_site/blog">Blog</a>
+                                     
+                                </li>
+                                
+                                <li>
+                                    <a href="http://github.com/xesscorp/PYNQer">Github</a>
+                                     
+                                </li>
+                                
+                                <li>
+                                    <a href="https://xesscorp.github.io/pynqer/docs/_site/about">About</a>
+                                     
+                                </li>
+                                            
+                                <li><a href="https://xesscorp.github.io/pynqer/docs/_site/feed.xml" title="Atom/RSS feed"><i class="icon-rss"></i> Feed</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                <div class="notepad-post-title-simple row">
+                    <div class="small-12 columns">
+                        <div class="notepad-post-meta-simple">
+                            <h1>PYNQ Setup</h1>
+                            <p>
+                                by <strong>Dave Vandenbout</strong> &#8212; 
+                                
+                                
+                                <strong><time datetime="2017-04-04T12:25:39-04:00">04 Apr 2017</time></strong>
+                            </p>
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- codein1 -->
+                            <ins class="adsbygoogle"
+                                style="display:inline-block;width:728px;height:90px"
+                                data-ad-client="ca-pub-7466474470517357"
+                                data-ad-slot="6700962438"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
+                </div>
+        </header>
+        
+        
+            <article class="notepad-post-content post tag-simple">
+        
+        <div><p>Every blog like this starts off with a post about setting up the equipment.
+This is that post.
+Basically, I’m following the instructions given
+<a href="https://pynq.readthedocs.io/en/latest/1_getting_started.html">here</a>.
+I won’t be saying anything new unless I manage to screw up.</p>
+
+<p>Every blog post has to have at least one picture, so here’s one
+of the PYNQ-Z1 board I received from Patrick Lysaght of Xilinx.</p>
+
+<p><img src="https://xesscorp.github.io/pynqer/docs/_site/images/pynq-setup/PYNQ.jpg" width="800" alt="A PYNQ board." /></p>
+
+<p>Along with the board, I got a bunch of cables and an 8GB μSD card.
+It probably contained a preloaded image with the OS and example files
+but I didn’t even check.
+I just downloaded the <a href="https://files.digilent.com/Products/PYNQ/pynq_z1_image_2017_02_10.zip">freshest image</a>
+and reflashed the card using <a href="https://sourceforge.net/projects/win32diskimager/">Win32 Disk Imager</a>.
+(Bonus points if you can see what I did wrong here.)</p>
+
+<p><img src="https://xesscorp.github.io/pynqer/docs/_site/images/pynq-setup/reflash-card-wrong.png" alt="Reflashing the PYNQ image." /></p>
+
+<p>I inserted the programmed μSD card into the PYNQ and set the <code class="highlighter-rouge">JP4</code> jumper to
+the <code class="highlighter-rouge">SD</code> setting so the board would boot from it.</p>
+
+<p>Next, I connected an Ethernet cable directly from the PYNQ to my PC and 
+<a href="http://helpdeskgeek.com/windows-7/bridge-network-connections-in-windows-7/">bridged the PC Ethernet adapter to the wireless adapter</a>
+that accesses the internet.</p>
+
+<p>Then I attached a micro-USB cable from my PC to the <code class="highlighter-rouge">PROG UART</code> connector
+on the PYNQ.</p>
+
+<p>Last but not least, I attached the supplied 12V / 3.0A power adapter
+to the power jack on the PYNQ, set the shunt on the <code class="highlighter-rouge">JP5</code> jumper to the <code class="highlighter-rouge">REG</code>
+position (the upper two pins), <strong>made sure the power switch was in the OFF position</strong>,
+and plugged the adapter into a wall socket.</p>
+
+<p><img src="https://xesscorp.github.io/pynqer/docs/_site/images/pynq-setup/pynq-connections.jpg" width="800" alt="Connections to the PYNQ." /></p>
+
+<p>The moment of truth had arrived: I pushed the power switch to the right and … nothing.
+The red power LED came on, but the green <code class="highlighter-rouge">DONE</code> LED (<code class="highlighter-rouge">LED12</code>) midway between the
+ZYNQ chip and the Ethernet connector stubbornly stayed off.
+That indicated the ZYNQ was not getting configured.
+Maybe reflashing that μSD card was a bad idea…</p>
+
+<p>It turned out it <em>was</em> a bad idea.
+After checking all the connections and powering the board on and off a few times,
+I decided to check how I programmed the μSD card.
+If you look at the Win32 Disk Imager screen above, you’ll see <em>I programmed
+the card with the ZIP file instead of the <code class="highlighter-rouge">.img</code> file it contained!</em>
+Doh!
+Unpacking the ZIP file and re-reflashing the card with the <code class="highlighter-rouge">.img</code> file fixed that error:</p>
+
+<p><img src="https://xesscorp.github.io/pynqer/docs/_site/images/pynq-setup/reflash-card-right.png" alt="Re-reflashing the PYNQ image." /></p>
+
+<p>After replacing the corrected μSD card in the PYNQ and applying power, the <code class="highlighter-rouge">DONE</code> LED
+comes on and (after a small delay) the <code class="highlighter-rouge">LD0 - LD5</code> LEDs flash on-and-off eight or nine times.
+That means the ZYNQ has configured correctly, booted the OS, and established communications
+so it’s ready to talk to me.</p>
+
+<p><img src="https://xesscorp.github.io/pynqer/docs/_site/images/pynq-setup/pynq-ready.png" width="800" alt="LED pattern for properly initialized PYNQ." /></p>
+
+<p>Or maybe not:
+when I tried to communicate with the board using a browser and either
+<code class="highlighter-rouge">http://pynq:9090</code> or <code class="highlighter-rouge">http://192.168.2.99:9090</code> as the address, I got
+the dreaded message:</p>
+
+<p><img src="https://xesscorp.github.io/pynqer/docs/_site/images/pynq-setup/unreachable-pynq.png" width="800" alt="The PYNQ was unreachable through the browser." /></p>
+
+<p>I tried a bunch of variations on the addresses and nothing worked.
+Eventually it occurred to me that, since I was using a direct connection to the
+board without an intervening router running DHCP, I needed to adjust the IP address of
+my PC’s Ethernet port to match the PYNQ’s subnet (192.168.2):</p>
+
+<p><img src="https://xesscorp.github.io/pynqer/docs/_site/images/pynq-setup/setting-ethernet-IPV4.png" alt="Setting the PC Ethernet port IPV4 address to match the PYNQ." /></p>
+
+<p>But even that didn’t fix the problem.
+Finally, I removed the bridge between the PC’s Ethernet port and its wireless adapter.
+With that, I was able to login using the hard-coded IPV4 address of the PYNQ:</p>
+
+<p><img src="https://xesscorp.github.io/pynqer/docs/_site/images/pynq-setup/hard-coded-login.png" alt="Logging into the PYNQ using its hard-coded IPV4 address." /></p>
+
+<p>Unfortunately, the PYNQ couldn’t reach the internet in this configuration,
+and I wanted to be able to easily download new software to it.
+I went back and tried Internet Connection Sharing (ICS) but it complained
+it needed to occupy the 192.168.0.1 address and that’s where my wireless router sits.
+Therefore, I moved the router to the 192.168.1.x subnet and ICS still couldn’t
+get packets from the PYNQ to the internet and back.
+So I ditched ICS and tried to go old school and modify the routing tables
+on my PC and wireless router (without much success).
+Then I moved my entire network to the 192.168.2.x subnet to match up with the
+subnet used by the PYNQ.
+That actually worked, but it seemed like a pretty janky setup that might cause
+other problems down the road.</p>
+
+<p>Admitting defeat, I dug out an old travel WiFi router, configured it as a client-mode
+device, and used it to connect the PYNQ to my wireless network.
+Then all my devices could see it and the PYNQ could get onto the internet.
+I could also remove the direct Ethernet connection and pack everything
+into a small space with short cords I’d be less likely to snag:</p>
+
+<p><img src="https://xesscorp.github.io/pynqer/docs/_site/images/pynq-setup/final-pynq-setup.png" alt="PYNQ with WiFi connection, USB connection, and power adapter." /></p>
+
+<p>With this arrangement, the PYNQ is accessible from anywhere within reach of my WiFi and I
+can download things like new Python modules for it from the internet:</p>
+
+<p><img src="https://xesscorp.github.io/pynqer/docs/_site/images/pynq-setup/pynq-downloading.png" alt="PYNQ downloading a Python module." /></p>
+
+<p>Now it’s on to the serious play of making the PYNQ do stuff.</p>
+
+        </div>
+        <div style="text-align: center;">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- codein2-footer -->
+<!--
+        <ins class="adsbygoogle"
+            style="display:inline-block;width:728px;height:90px"
+            data-ad-client="ca-pub-7466474470517357"
+            data-ad-slot="9952356430"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+-->
+        </div>
+        </article>
+        <div class="cf"></div>
+                <div class="row text-center">
+            <section class="notepad-post-share">
+                <a class="twitter-icon" href="https://twitter.com/intent/tweet?text=&quot;PYNQ Setup&quot;%20https://xesscorp.github.io/pynqer/docs/_site/blog/pynq-setup%20via%20&#64;xesscorp"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" title="Share on Twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="facebook-icon" href="https://www.facebook.com/sharer/sharer.php?u=https://xesscorp.github.io/pynqer/docs/_site/blog/pynq-setup"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" title="Share on Facebook">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a class="google-icon" href="https://plus.google.com/share?url=https://xesscorp.github.io/pynqer/docs/_site/blog/pynq-setup"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" title="Share on Google+">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+            </section>
+        </div>
+        <div class="cf"></div>
+                    <div class="notepad-author-info">
+                <div class="row">
+                    <section class="notepad-post-author small-12 columns">
+                        <img src="https://xesscorp.github.io/pynqer/docs/_site/images/devb-pic.jpg" class="notepad-post-author-avatar" alt="Dave Vandenbout's photo">
+                        <span class="author-label">Author:</span>
+                        <h1>Dave Vandenbout</h1>
+                        <p><a href="mailto:devb@xess.com" class="author-website">devb@xess.com</a>
+                        <p>Relax, I do this stuff for a living.</p>
+                    </section>
+                </div>
+            </div>
+ 
+        <div class="cf"></div>
+        
+        <div class="cf"></div>
+        <footer class="notepad-site-footer">
+    <div class="copyright">
+        <section>
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+                <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+            </a>
+            <br /><br />
+            <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">PYNQer website</span> by 
+            <a xmlns:cc="http://creativecommons.org/ns#" href="www.xess.com" property="cc:attributionName" rel="cc:attributionURL">
+                XESS Corporation
+            </a> 
+            is licensed under a 
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+                Creative Commons Attribution 4.0 International License
+            </a>.
+        </section>
+        <br />
+        <p>
+            <a href='http://www.catb.org/hacker-emblem/' target="_blank"><img src='https://xesscorp.github.io/pynqer/docs/_site/assets/img/hacker.png' alt='hacker emblem' /></a>
+            <a href="http://endsoftpatents.org/innovating-without-patents" target="_blank"><img style="border-width:0" src="https://xesscorp.github.io/pynqer/docs/_site/assets/img/patent-free.png"></a>
+        </p>
+    </div>
+    <div class="social-icons">
+        
+        
+        <a href="http://twitter.com/xesscorp">
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                <i class="fa fa-twitter fa-stack-1x"></i>
+            </span>
+        </a>
+        
+        
+        
+        
+        <a href="http://github.com/xesscorp">
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                <i class="fa fa-github fa-stack-1x"></i>
+            </span>
+        </a>
+        
+        
+    </div>
+    
+    <div class="cf"></div>
+</footer>
+ 
+        </main>    
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="https://xesscorp.github.io/pynqer/docs/_site/assets/js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+    <script src="https://xesscorp.github.io/pynqer/docs/_site/assets/js/vendor/modernizr.js"></script>
+    <script src="https://xesscorp.github.io/pynqer/docs/_site/assets/js/foundation.min.js"></script>
+    
+    <script src="https://xesscorp.github.io/pynqer/docs/_site/assets/js/notepad.js"></script>
+    <script src="https://xesscorp.github.io/pynqer/docs/_site/assets/js/scripts.min.js"></script>
+    <script src="https://xesscorp.github.io/pynqer/docs/_site/assets/js/vendor/nprogress.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/sigma.js/1.0.3/sigma.min.js"></script>
+
+    <script>
+      $(document).foundation();
+    </script>
+
+
+<script>NProgress.start();var interval=setInterval(function(){NProgress.inc()},1000);jQuery(window).load(function(){clearInterval(interval);NProgress.done()});jQuery(window).unload(function(){NProgress.start()});</script>
+ 
+    </body>
+</html>
