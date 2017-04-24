@@ -3,6 +3,11 @@ callback([
   {
     "text": "PYNQ Setup",
     "href": "https://xesscorp.github.io/pynqer/docs/_site/blog/pynq-setup"
+  } ,
+
+  {
+    "text": "Reading the Docs",
+    "href": "https://xesscorp.github.io/pynqer/docs/_site/blog/reading-the-docs"
   } 
 
 ])

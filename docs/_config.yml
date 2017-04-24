@@ -9,7 +9,6 @@ dropcap:	      true
 # or use the hint from http://jekyllrb.com/docs/github-pages/ to keep this the same 
 # whether working locally or remotely. Start Jekyll with: jekyll serve --baseurl ''
 url:        	 https://xesscorp.github.io/pynqer/docs/_site
-#url: http://127.0.0.1:4000
 
 
 # Owner/author information
@@ -55,7 +54,7 @@ links:
     url: /about
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-#timezone:    US/Eastern
+#timezone:    America/New_York
 future:      true
 #rouge: pygments
 markdown:    kramdown

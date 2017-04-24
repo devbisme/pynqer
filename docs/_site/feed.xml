@@ -7,13 +7,262 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="https://xesscorp.github.io/pynqer/docs/_site/feed.xml" />
 <link rel="alternate" type="text/html" href="https://xesscorp.github.io/pynqer/docs/_site/" />
-<updated>2017-04-08T12:39:18-04:00</updated>
+<updated>2017-04-24T16:12:46-04:00</updated>
 <id>https://xesscorp.github.io/pynqer/docs/_site/</id>
 <author>
   <name>XESS Corp.</name>
   <uri>https://xesscorp.github.io/pynqer/docs/_site/</uri>
   <email>pynqer@xess.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Reading the Docs]]></title>
+  <link rel="alternate" type="text/html" href="https://xesscorp.github.io/pynqer/docs/_site/blog/reading-the-docs"/>
+  <id>https://xesscorp.github.io/pynqer/docs/_site/blog/reading-the-docs</id>
+  <published>2017-04-22T14:04:30-04:00</published>
+  <updated>2017-04-22T14:04:30-04:00</updated>
+  <author>
+    <name>XESS Corp.</name>
+    <uri>https://xesscorp.github.io/pynqer/docs/_site</uri>
+    <email>pynqer@xess.com</email>
+  </author>
+  
+  <content type="html">
+  
+    &lt;p&gt;After &lt;a href=&quot;https://xesscorp.github.io/pynqer/docs/_site/blog/pynq-setup&quot;&gt;installing my PYNQ board&lt;/a&gt;,
+I took a break to release an update to my
+&lt;a href=&quot;https://xesscorp.github.io/skidl&quot;&gt;SKiDL circuit design language&lt;/a&gt;.
+These things always take longer than you expect,
+but I’m back now and my next task is to familiarize myself with the PYNQ
+documentation.&lt;/p&gt;
+
+&lt;p&gt;When you first login to the PYNQ, you’ll see the &lt;code class=&quot;highlighter-rouge&quot;&gt;getting_started&lt;/code&gt; link:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://xesscorp.github.io/pynqer/docs/_site/images/reading-the-docs/welcome-screen.png&quot; width=&quot;800&quot; alt=&quot;Welcome screen.&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Clicking on that (because that seems a natural place to start) brings up a set
+of introductory Jupyter notebooks:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://xesscorp.github.io/pynqer/docs/_site/images/reading-the-docs/getting-started-screen.png&quot; width=&quot;800&quot; alt=&quot;Getting Started notebooks.&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The first thing you need to realize about these notebooks is &lt;em&gt;you can skip all of them!&lt;/em&gt;
+If you’re like me and have to read everything out of fear you’ll miss something,
+know that all this material is already available at the 
+&lt;a href=&quot;https://pynq.readthedocs.io/en/latest/&quot;&gt;main PYNQ documentation site&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;However, one advantage of having these notebooks immediately available upon setting
+up the PYNQ is that you can exercise the board without having to download anything.
+Here’s what the notebooks cover:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;1_jupyer_notebook.ipynb&lt;/code&gt;: Explains the basics of getting around in a Jupyter
+notebook.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;2_programming_python.ipynb&lt;/code&gt;: Gives a &lt;em&gt;brief&lt;/em&gt; introduction to Python, but you’ll
+want to take advantage of the many online Python tutorials to get a full
+understanding. (This is probably a good idea, just like learning &lt;code class=&quot;highlighter-rouge&quot;&gt;C&lt;/code&gt; was a good
+idea in the 80’s.)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;3_programming_onboard.ipynb&lt;/code&gt;: Let’s you play with the buttons, slide switches
+and LEDs of the PYNQ. Every system has a blinky, and this one is PYNQ’s.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;4_base_overlay_iop.ipynb&lt;/code&gt;: Shows you how to access the Pmod ports to sense the
+ambient light level and display it on an OLED. Of course, if you don’t have
+the light sensor or OLED PMODs then this is pretty much useless.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;5_base_overlay_video.ipynb&lt;/code&gt;: Demonstrates capturing and displaying video via
+the two HDMI ports on the PYNQ. There’s also a bit of image processing.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;6_base_overlay_audio.ipynb&lt;/code&gt;: Like the video demo, but using the on-board
+microphone (it’s actually a tiny chip on the underside of the board) and an
+external speaker or headphones to record and playback sound.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Turning to the &lt;a href=&quot;https://pynq.readthedocs.io/en/latest/&quot;&gt;main PYNQ site&lt;/a&gt;, 
+here are the nuggets I extracted:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;PYNQ uses the ZYNQ chips’s processing system (PS) with dual ARM processors
+to run the Jupyter notebook and Python interpreter.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The programmable logic (PL) section is used to host &lt;em&gt;overlays&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;An overlay programs the PL to provide support for an application.
+An API allows the PS to load overlays into the PL and access functions in it 
+such as read and write registers.
+The API is contained in a Python module and accessed with Python.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Creating an overlay is done using the Vivado FPGA programming environment and
+requires logic design expertise.
+To leverage this limited expertise, an overlay is typically designed with
+maximum generality so it can be used in a large number of applications.
+For example, the &lt;em&gt;base overlay&lt;/em&gt; provides functions for working with the Pmod
+and Arduino I/O interfaces, audio I/O, HDMI I/O, and general-purpose I/O.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The Arduino and Pmod connectors can interface to a wide variety of external
+circuitry. In order to support this without having to redesign the logic circuitry
+for each application, the base overlay uses reprogrammable I/O Processors (IOPs),
+a set of peripherals (timers, SPI, I$^2$C, interrupt controllers),
+and a reconfigurable switch.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The IOP is programmed in C/C++ and is intended for real-time, low-level
+operations. The PS is programmed with Python for higher-level, data-handling
+and display operations.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The base overlay uses a 32-bit, 100 MHz Microblaze for each IOP.
+A 64 KB dual-port BRAM stores the program for the Microblaze.
+The PS loads the program into the BRAM and starts the Microblaze.
+The remainder of the BRAM can be used for local data or for passing data
+back-and-forth between the PS and the IOP.
+A &lt;em&gt;mailbox&lt;/em&gt; located between &lt;code class=&quot;highlighter-rouge&quot;&gt;0xF000&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;0xFFFF&lt;/code&gt; in the IOP BRAM is typically
+used for passing data. 
+The IOP also has access to the external DDR chip on the PYNQ board, and
+this can be used to transfer larger blocks of data.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The reconfigurable switch in the IOP allows it to connect its various peripherals
+to the physical I/O pins of the Pmod or Arduino headers.
+The switch is controlled by the Microblaze.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Programs for the IOP are developed using the
+&lt;a href=&quot;http://www.xilinx.com/products/design-tools/embedded-software/sdk.html&quot;&gt;Xilinx SDK&lt;/a&gt;.
+&lt;a href=&quot;http://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2016-1.html&quot;&gt;Version 2016.1 of Vivado and the SDK&lt;/a&gt; is recommended.
+(I’m currently using 2016.4, so I’ll continue with that until a problem arises.)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://pynq.readthedocs.io/en/latest/11b_iop_applications.html#compiling-projects&quot;&gt;Building an application for an IOP&lt;/a&gt;
+requires:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;A &lt;em&gt;hardware description file&lt;/em&gt; (HDF) that Vivado uses to create a &lt;em&gt;Hardware Platform&lt;/em&gt;.
+(Already provided for the PYNQ.)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;A &lt;em&gt;board support package&lt;/em&gt; (BSP) that contains the software for interacting with
+the peripherals described in the HDF. There can be more than one BSP for a
+hardware platform. For example, the base overlay has two BSPs: one for the
+Pmod IOP and another for the Arduino IOP.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;The BSP is linked with the application C/C++ code by the SDK compiler to create
+an &lt;code class=&quot;highlighter-rouge&quot;&gt;.elf&lt;/code&gt; file which is then translated into a &lt;code class=&quot;highlighter-rouge&quot;&gt;.bin&lt;/code&gt; file that can
+be loaded into the IOP program memory.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The IOP has an API for interfacing to its peripherals, its
+reconfigurable switch, and the IOP-to-PS mailbox.
+(The PS has a separate API for communicating with the IOP.)
+The Arduino and Pmod IOPs are identical except for the reconfigurable switches
+that connect their peripherals to the I/O pins of the
+&lt;a href=&quot;https://github.com/Xilinx/PYNQ/tree/master/Pynq-Z1/vivado/ip/arduino_io_switch_1.0/drivers/arduino_io_switch_v1_0/src&quot;&gt;Arduino&lt;/a&gt;
+or
+&lt;a href=&quot;https://github.com/Xilinx/PYNQ/tree/master/Pynq-Z1/vivado/ip/pmod_io_switch_1.0/drivers/pmod_io_switch_v1_0/src&quot;&gt;Pmod&lt;/a&gt;
+headers.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The details of programming the IOP are explained &lt;a href=&quot;https://pynq.readthedocs.io/en/latest/11c_iop_using_peripherals.html&quot;&gt;here&lt;/a&gt;.
+This covers the details of using the IOP &lt;code class=&quot;highlighter-rouge&quot;&gt;C&lt;/code&gt; API to talk to the peripherals
+and reconfigurable switch, and also covers the C and Python APIs for mailbox
+communications.
+(I won’t summarize this further. The link will provide a path to the details
+needed to do IOP programming.)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Interrupt architecture:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;The IOPs use the Microblaze
+&lt;a href=&quot;https://www.xilinx.com/products/intellectual-property/axi_intc.html&quot;&gt;AXI Interrupt Controller&lt;/a&gt;
+internally.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;The  base overlay also has an interrupt controller that can throw interrupts
+from the IOPs over to the PS.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;One way the interrupts from the IOPs are handled in the PS is with Python’s
+&lt;a href=&quot;https://docs.python.org/3.6/library/asyncio.html#module-asyncio&quot;&gt;asyncio package&lt;/a&gt;.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Creating Overlays:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;Unlike a standard Zynq design, PYNQ’s PS section is already defined and the
+PL design must match its settings (e.g., clock configuration).&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Vivado exports a &lt;code class=&quot;highlighter-rouge&quot;&gt;tcl&lt;/code&gt; file describing the application mapped into the PL.
+The &lt;code class=&quot;highlighter-rouge&quot;&gt;tcl&lt;/code&gt; file is parsed by the PS using the &lt;code class=&quot;highlighter-rouge&quot;&gt;Overlay&lt;/code&gt; class of the &lt;code class=&quot;highlighter-rouge&quot;&gt;pynq&lt;/code&gt; Python
+package.
+The result of the parsing is a list of addressable resources in the overlay
+such as interrupt controllers, GPIO pins, IOP BRAMs, etc.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;pynq&lt;/code&gt; package provides the &lt;code class=&quot;highlighter-rouge&quot;&gt;MMIO&lt;/code&gt; class which is used to do memory-to-memory
+transfers between the PS and the addressable elements of an overlay.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;After reviewing the PYNQ docs, I see three levels for using the PYNQ, each level
+requiring the skills of the ones above it:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;You can be given an overlay and then control it from Python as if it were a
+peripheral attached to the PS. This requires understanding of the &lt;code class=&quot;highlighter-rouge&quot;&gt;pynq&lt;/code&gt;
+Python package.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;You can be given an overlay but run your own programs on any 
+IOPs it contains. This requires additional skills to:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;develop programs for the IOPs (Microblaze programming with the SDK or otherwise),&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;create an API in Python for talking to the IOPs from the PS, and&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;package, download and initiate the compiled programs to the IOPs.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Develop your own overlay for the PL using Vivado.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;So my job now is to progress through these levels.&lt;/p&gt;
+
+  
+  &lt;p&gt;&lt;a href=&quot;https://xesscorp.github.io/pynqer/docs/_site/blog/reading-the-docs&quot;&gt;Reading the Docs&lt;/a&gt; was originally published by XESS Corp. at &lt;a href=&quot;https://xesscorp.github.io/pynqer/docs/_site&quot;&gt;PYNQer&lt;/a&gt; on April 22, 2017.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>

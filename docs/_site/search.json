@@ -1,6 +1,14 @@
 [
 	
 		{
+		  "title"      : "Reading the Docs",
+		  "category"   : "blog",
+		  "url"        : "https://xesscorp.github.io/pynqer/docs/_site/blog/reading-the-docs",
+		  "date"       : "2017-04-22 14:04:30 -0400",
+		  "shortdate"  : "April 22, 2017"
+		} ,
+	
+		{
 		  "title"      : "PYNQ Setup",
 		  "category"   : "blog",
 		  "url"        : "https://xesscorp.github.io/pynqer/docs/_site/blog/pynq-setup",

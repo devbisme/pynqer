@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<title>READING THE DOCS &vert; PYNQER</title>
+<meta name="description" content="To work with PYNQ in an unskilled or experimental manner.">
+<meta name="keywords" content="">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xesscorp.github.io/pynqer/docs/_site/images/logo.png">
+<meta name="twitter:title" content="Reading the Docs">
+<meta name="twitter:description" content="To work with PYNQ in an unskilled or experimental manner.">
+<meta name="twitter:creator" content="@xesscorp">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reading the Docs">
+<meta property="og:description" content="To work with PYNQ in an unskilled or experimental manner.">
+<meta property="og:url" content="https://xesscorp.github.io/pynqer/docs/_site/blog/reading-the-docs">
+<meta property="og:site_name" content="PYNQer">
+<meta property="og:image" content="https://xesscorp.github.io/pynqer/docs/_site/images/">
+
+
+
+
+
+<link rel="canonical" href="https://xesscorp.github.io/pynqer/docs/_site/blog/reading-the-docs">
+<link href="https://xesscorp.github.io/pynqer/docs/_site/feed.xml" type="application/atom+xml" rel="alternate" title="PYNQer Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,600,300,800,700' rel='stylesheet' type='text/css'>
+	<!-- <link rel="stylesheet" href="https://xesscorp.github.io/pynqer/docs/_site/assets/css/vendor/font-awesome.min.css"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://xesscorp.github.io/pynqer/docs/_site/assets/css/vendor/normalize.css">
+    <link rel="stylesheet" href="https://xesscorp.github.io/pynqer/docs/_site/assets/css/vendor/nprogress.css">
+    <link rel="stylesheet" href="https://xesscorp.github.io/pynqer/docs/_site/assets/css/vendor/foundation.min.css">
+    <link rel="stylesheet" href="https://xesscorp.github.io/pynqer/docs/_site/assets/css/style.css">
+    <link rel="stylesheet" href="https://xesscorp.github.io/pynqer/docs/_site/assets/css/post.css">
+
+
+
+<!--Load Mathjax-->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+        MathJax.Hub.Config({
+            config: ["MMLorHTML.js"],
+            extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+            jax: ["input/TeX"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+            TeX: {
+                TagSide: "right",
+                TagIndent: ".8em",
+                MultLineWidth: "85%",
+                equationNumbers: {
+                   autoNumber: "AMS",
+                },
+                unicode: {
+                   fonts: "STIXGeneral,'Arial Unicode MS'" 
+                }
+            },
+            showProcessingMessages: false
+        });
+    </script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://xesscorp.github.io/pynqer/docs/_site/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://xesscorp.github.io/pynqer/docs/_site/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://xesscorp.github.io/pynqer/docs/_site/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://xesscorp.github.io/pynqer/docs/_site/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://xesscorp.github.io/pynqer/docs/_site/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://xesscorp.github.io/pynqer/docs/_site/images/apple-touch-icon-144x144-precomposed.png">
+
+        
+            <style type="text/css">@media only screen and (min-width:43.75em){.notepad-post-content div>p:first-child:first-letter{float:left;font-size:4.688rem;line-height:4.375rem;padding-top:.25rem;padding-right:.5rem;padding-left:.188rem;font-family:serif}}</style>
+        
+    </head>
+    <body class="post-template" itemscope itemtype="http://schema.org/WebPage">
+        
+            <main id="notepad-post-container-simple" class="notepad-post-container-simple" role="main">
+                <header class="notepad-post-header-simple">
+                    <div class="notepad-post-menu-header-simple">
+                        
+                        <a class="notepad-blog-logo" href="https://xesscorp.github.io/pynqer/docs/_site">
+                        <img src="https://xesscorp.github.io/pynqer/docs/_site/images/logo.png" alt="Blog Logo" />
+                        </a>
+                        <div class="notepad-blog-menu">
+                            <div class="notepad-mobile-menu show-for-small">
+                                <a href="#"><i class="fa fa-bars"></i></a>
+                            </div>
+                            <ul class="notepad-menu">
+                                <li class="notepad-mobile-close-btn show-for-small text-right">
+                                    <a href="#"><i class="fa fa-times"></i></a>
+                                </li>
+                                
+                                <li>
+                                    <a href="https://xesscorp.github.io/pynqer/docs/_site/">Home</a>
+                                     
+                                </li>
+                                
+                                <li>
+                                    <a href="https://xesscorp.github.io/pynqer/docs/_site/blog">Blog</a>
+                                     
+                                </li>
+                                
+                                <li>
+                                    <a href="http://github.com/xesscorp/PYNQer">Github</a>
+                                     
+                                </li>
+                                
+                                <li>
+                                    <a href="https://xesscorp.github.io/pynqer/docs/_site/about">About</a>
+                                     
+                                </li>
+                                            
+                                <li><a href="https://xesscorp.github.io/pynqer/docs/_site/feed.xml" title="Atom/RSS feed"><i class="icon-rss"></i> Feed</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                <div class="notepad-post-title-simple row">
+                    <div class="small-12 columns">
+                        <div class="notepad-post-meta-simple">
+                            <h1>Reading the Docs</h1>
+                            <p>
+                                by <strong>Dave Vandenbout</strong> &#8212; 
+                                
+                                
+                                <strong><time datetime="2017-04-22T14:04:30-04:00">22 Apr 2017</time></strong>
+                            </p>
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- codein1 -->
+                            <ins class="adsbygoogle"
+                                style="display:inline-block;width:728px;height:90px"
+                                data-ad-client="ca-pub-7466474470517357"
+                                data-ad-slot="6700962438"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
+                </div>
+        </header>
+        
+        
+            <article class="notepad-post-content post tag-simple">
+        
+        <div><p>After <a href="https://xesscorp.github.io/pynqer/docs/_site/blog/pynq-setup">installing my PYNQ board</a>,
+I took a break to release an update to my
+<a href="https://xesscorp.github.io/skidl">SKiDL circuit design language</a>.
+These things always take longer than you expect,
+but I’m back now and my next task is to familiarize myself with the PYNQ
+documentation.</p>
+
+<p>When you first login to the PYNQ, you’ll see the <code class="highlighter-rouge">getting_started</code> link:</p>
+
+<p><img src="https://xesscorp.github.io/pynqer/docs/_site/images/reading-the-docs/welcome-screen.png" width="800" alt="Welcome screen." /></p>
+
+<p>Clicking on that (because that seems a natural place to start) brings up a set
+of introductory Jupyter notebooks:</p>
+
+<p><img src="https://xesscorp.github.io/pynqer/docs/_site/images/reading-the-docs/getting-started-screen.png" width="800" alt="Getting Started notebooks." /></p>
+
+<p>The first thing you need to realize about these notebooks is <em>you can skip all of them!</em>
+If you’re like me and have to read everything out of fear you’ll miss something,
+know that all this material is already available at the 
+<a href="https://pynq.readthedocs.io/en/latest/">main PYNQ documentation site</a>.</p>
+
+<p>However, one advantage of having these notebooks immediately available upon setting
+up the PYNQ is that you can exercise the board without having to download anything.
+Here’s what the notebooks cover:</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">1_jupyer_notebook.ipynb</code>: Explains the basics of getting around in a Jupyter
+notebook.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">2_programming_python.ipynb</code>: Gives a <em>brief</em> introduction to Python, but you’ll
+want to take advantage of the many online Python tutorials to get a full
+understanding. (This is probably a good idea, just like learning <code class="highlighter-rouge">C</code> was a good
+idea in the 80’s.)</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">3_programming_onboard.ipynb</code>: Let’s you play with the buttons, slide switches
+and LEDs of the PYNQ. Every system has a blinky, and this one is PYNQ’s.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">4_base_overlay_iop.ipynb</code>: Shows you how to access the Pmod ports to sense the
+ambient light level and display it on an OLED. Of course, if you don’t have
+the light sensor or OLED PMODs then this is pretty much useless.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">5_base_overlay_video.ipynb</code>: Demonstrates capturing and displaying video via
+the two HDMI ports on the PYNQ. There’s also a bit of image processing.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">6_base_overlay_audio.ipynb</code>: Like the video demo, but using the on-board
+microphone (it’s actually a tiny chip on the underside of the board) and an
+external speaker or headphones to record and playback sound.</p>
+  </li>
+</ul>
+
+<p>Turning to the <a href="https://pynq.readthedocs.io/en/latest/">main PYNQ site</a>, 
+here are the nuggets I extracted:</p>
+
+<ul>
+  <li>
+    <p>PYNQ uses the ZYNQ chips’s processing system (PS) with dual ARM processors
+to run the Jupyter notebook and Python interpreter.</p>
+  </li>
+  <li>
+    <p>The programmable logic (PL) section is used to host <em>overlays</em>.</p>
+  </li>
+  <li>
+    <p>An overlay programs the PL to provide support for an application.
+An API allows the PS to load overlays into the PL and access functions in it 
+such as read and write registers.
+The API is contained in a Python module and accessed with Python.</p>
+  </li>
+  <li>
+    <p>Creating an overlay is done using the Vivado FPGA programming environment and
+requires logic design expertise.
+To leverage this limited expertise, an overlay is typically designed with
+maximum generality so it can be used in a large number of applications.
+For example, the <em>base overlay</em> provides functions for working with the Pmod
+and Arduino I/O interfaces, audio I/O, HDMI I/O, and general-purpose I/O.</p>
+  </li>
+  <li>
+    <p>The Arduino and Pmod connectors can interface to a wide variety of external
+circuitry. In order to support this without having to redesign the logic circuitry
+for each application, the base overlay uses reprogrammable I/O Processors (IOPs),
+a set of peripherals (timers, SPI, I$^2$C, interrupt controllers),
+and a reconfigurable switch.</p>
+  </li>
+  <li>
+    <p>The IOP is programmed in C/C++ and is intended for real-time, low-level
+operations. The PS is programmed with Python for higher-level, data-handling
+and display operations.</p>
+  </li>
+  <li>
+    <p>The base overlay uses a 32-bit, 100 MHz Microblaze for each IOP.
+A 64 KB dual-port BRAM stores the program for the Microblaze.
+The PS loads the program into the BRAM and starts the Microblaze.
+The remainder of the BRAM can be used for local data or for passing data
+back-and-forth between the PS and the IOP.
+A <em>mailbox</em> located between <code class="highlighter-rouge">0xF000</code> and <code class="highlighter-rouge">0xFFFF</code> in the IOP BRAM is typically
+used for passing data. 
+The IOP also has access to the external DDR chip on the PYNQ board, and
+this can be used to transfer larger blocks of data.</p>
+  </li>
+  <li>
+    <p>The reconfigurable switch in the IOP allows it to connect its various peripherals
+to the physical I/O pins of the Pmod or Arduino headers.
+The switch is controlled by the Microblaze.</p>
+  </li>
+  <li>
+    <p>Programs for the IOP are developed using the
+<a href="http://www.xilinx.com/products/design-tools/embedded-software/sdk.html">Xilinx SDK</a>.
+<a href="http://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2016-1.html">Version 2016.1 of Vivado and the SDK</a> is recommended.
+(I’m currently using 2016.4, so I’ll continue with that until a problem arises.)</p>
+  </li>
+  <li>
+    <p><a href="https://pynq.readthedocs.io/en/latest/11b_iop_applications.html#compiling-projects">Building an application for an IOP</a>
+requires:</p>
+
+    <ul>
+      <li>
+        <p>A <em>hardware description file</em> (HDF) that Vivado uses to create a <em>Hardware Platform</em>.
+(Already provided for the PYNQ.)</p>
+      </li>
+      <li>
+        <p>A <em>board support package</em> (BSP) that contains the software for interacting with
+the peripherals described in the HDF. There can be more than one BSP for a
+hardware platform. For example, the base overlay has two BSPs: one for the
+Pmod IOP and another for the Arduino IOP.</p>
+      </li>
+      <li>
+        <p>The BSP is linked with the application C/C++ code by the SDK compiler to create
+an <code class="highlighter-rouge">.elf</code> file which is then translated into a <code class="highlighter-rouge">.bin</code> file that can
+be loaded into the IOP program memory.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>The IOP has an API for interfacing to its peripherals, its
+reconfigurable switch, and the IOP-to-PS mailbox.
+(The PS has a separate API for communicating with the IOP.)
+The Arduino and Pmod IOPs are identical except for the reconfigurable switches
+that connect their peripherals to the I/O pins of the
+<a href="https://github.com/Xilinx/PYNQ/tree/master/Pynq-Z1/vivado/ip/arduino_io_switch_1.0/drivers/arduino_io_switch_v1_0/src">Arduino</a>
+or
+<a href="https://github.com/Xilinx/PYNQ/tree/master/Pynq-Z1/vivado/ip/pmod_io_switch_1.0/drivers/pmod_io_switch_v1_0/src">Pmod</a>
+headers.</p>
+  </li>
+  <li>
+    <p>The details of programming the IOP are explained <a href="https://pynq.readthedocs.io/en/latest/11c_iop_using_peripherals.html">here</a>.
+This covers the details of using the IOP <code class="highlighter-rouge">C</code> API to talk to the peripherals
+and reconfigurable switch, and also covers the C and Python APIs for mailbox
+communications.
+(I won’t summarize this further. The link will provide a path to the details
+needed to do IOP programming.)</p>
+  </li>
+  <li>
+    <p>Interrupt architecture:</p>
+
+    <ul>
+      <li>
+        <p>The IOPs use the Microblaze
+<a href="https://www.xilinx.com/products/intellectual-property/axi_intc.html">AXI Interrupt Controller</a>
+internally.</p>
+      </li>
+      <li>
+        <p>The  base overlay also has an interrupt controller that can throw interrupts
+from the IOPs over to the PS.</p>
+      </li>
+      <li>
+        <p>One way the interrupts from the IOPs are handled in the PS is with Python’s
+<a href="https://docs.python.org/3.6/library/asyncio.html#module-asyncio">asyncio package</a>.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Creating Overlays:</p>
+
+    <ul>
+      <li>
+        <p>Unlike a standard Zynq design, PYNQ’s PS section is already defined and the
+PL design must match its settings (e.g., clock configuration).</p>
+      </li>
+      <li>
+        <p>Vivado exports a <code class="highlighter-rouge">tcl</code> file describing the application mapped into the PL.
+The <code class="highlighter-rouge">tcl</code> file is parsed by the PS using the <code class="highlighter-rouge">Overlay</code> class of the <code class="highlighter-rouge">pynq</code> Python
+package.
+The result of the parsing is a list of addressable resources in the overlay
+such as interrupt controllers, GPIO pins, IOP BRAMs, etc.</p>
+      </li>
+      <li>
+        <p>The <code class="highlighter-rouge">pynq</code> package provides the <code class="highlighter-rouge">MMIO</code> class which is used to do memory-to-memory
+transfers between the PS and the addressable elements of an overlay.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>After reviewing the PYNQ docs, I see three levels for using the PYNQ, each level
+requiring the skills of the ones above it:</p>
+
+<ol>
+  <li>
+    <p>You can be given an overlay and then control it from Python as if it were a
+peripheral attached to the PS. This requires understanding of the <code class="highlighter-rouge">pynq</code>
+Python package.</p>
+  </li>
+  <li>
+    <p>You can be given an overlay but run your own programs on any 
+IOPs it contains. This requires additional skills to:</p>
+
+    <ul>
+      <li>
+        <p>develop programs for the IOPs (Microblaze programming with the SDK or otherwise),</p>
+      </li>
+      <li>
+        <p>create an API in Python for talking to the IOPs from the PS, and</p>
+      </li>
+      <li>
+        <p>package, download and initiate the compiled programs to the IOPs.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Develop your own overlay for the PL using Vivado.</p>
+  </li>
+</ol>
+
+<p>So my job now is to progress through these levels.</p>
+
+        </div>
+        <div style="text-align: center;">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- codein2-footer -->
+<!--
+        <ins class="adsbygoogle"
+            style="display:inline-block;width:728px;height:90px"
+            data-ad-client="ca-pub-7466474470517357"
+            data-ad-slot="9952356430"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+-->
+        </div>
+        </article>
+        <div class="cf"></div>
+                <div class="row text-center">
+            <section class="notepad-post-share">
+                <a class="twitter-icon" href="https://twitter.com/intent/tweet?text=&quot;Reading the Docs&quot;%20https://xesscorp.github.io/pynqer/docs/_site/blog/reading-the-docs%20via%20&#64;xesscorp"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" title="Share on Twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="facebook-icon" href="https://www.facebook.com/sharer/sharer.php?u=https://xesscorp.github.io/pynqer/docs/_site/blog/reading-the-docs"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" title="Share on Facebook">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a class="google-icon" href="https://plus.google.com/share?url=https://xesscorp.github.io/pynqer/docs/_site/blog/reading-the-docs"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" title="Share on Google+">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+            </section>
+        </div>
+        <div class="cf"></div>
+                    <div class="notepad-author-info">
+                <div class="row">
+                    <section class="notepad-post-author small-12 columns">
+                        <img src="https://xesscorp.github.io/pynqer/docs/_site/images/devb-pic.jpg" class="notepad-post-author-avatar" alt="Dave Vandenbout's photo">
+                        <span class="author-label">Author:</span>
+                        <h1>Dave Vandenbout</h1>
+                        <p><a href="mailto:devb@xess.com" class="author-website">devb@xess.com</a>
+                        <p>Relax, I do this stuff for a living.</p>
+                    </section>
+                </div>
+            </div>
+ 
+        <div class="cf"></div>
+        
+        <div class="cf"></div>
+        <footer class="notepad-site-footer">
+    <div class="copyright">
+        <section>
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+                <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+            </a>
+            <br /><br />
+            <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">PYNQer website</span> by 
+            <a xmlns:cc="http://creativecommons.org/ns#" href="www.xess.com" property="cc:attributionName" rel="cc:attributionURL">
+                XESS Corporation
+            </a> 
+            is licensed under a 
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+                Creative Commons Attribution 4.0 International License
+            </a>.
+        </section>
+        <br />
+        <p>
+            <a href='http://www.catb.org/hacker-emblem/' target="_blank"><img src='https://xesscorp.github.io/pynqer/docs/_site/assets/img/hacker.png' alt='hacker emblem' /></a>
+            <a href="http://endsoftpatents.org/innovating-without-patents" target="_blank"><img style="border-width:0" src="https://xesscorp.github.io/pynqer/docs/_site/assets/img/patent-free.png"></a>
+        </p>
+    </div>
+    <div class="social-icons">
+        
+        
+        <a href="http://twitter.com/xesscorp">
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                <i class="fa fa-twitter fa-stack-1x"></i>
+            </span>
+        </a>
+        
+        
+        
+        
+        <a href="http://github.com/xesscorp">
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                <i class="fa fa-github fa-stack-1x"></i>
+            </span>
+        </a>
+        
+        
+    </div>
+    
+    <div class="cf"></div>
+</footer>
+ 
+        </main>    
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="https://xesscorp.github.io/pynqer/docs/_site/assets/js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+    <script src="https://xesscorp.github.io/pynqer/docs/_site/assets/js/vendor/modernizr.js"></script>
+    <script src="https://xesscorp.github.io/pynqer/docs/_site/assets/js/foundation.min.js"></script>
+    
+    <script src="https://xesscorp.github.io/pynqer/docs/_site/assets/js/notepad.js"></script>
+    <script src="https://xesscorp.github.io/pynqer/docs/_site/assets/js/scripts.min.js"></script>
+    <script src="https://xesscorp.github.io/pynqer/docs/_site/assets/js/vendor/nprogress.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/sigma.js/1.0.3/sigma.min.js"></script>
+
+    <script>
+      $(document).foundation();
+    </script>
+
+
+<script>NProgress.start();var interval=setInterval(function(){NProgress.inc()},1000);jQuery(window).load(function(){clearInterval(interval);NProgress.done()});jQuery(window).unload(function(){NProgress.start()});</script>
+ 
+    </body>
+</html>
