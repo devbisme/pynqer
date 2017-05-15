@@ -7,13 +7,456 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="https://xesscorp.github.io/pynqer/docs/_site/feed.xml" />
 <link rel="alternate" type="text/html" href="https://xesscorp.github.io/pynqer/docs/_site/" />
-<updated>2017-04-24T16:12:46-04:00</updated>
+<updated>2017-05-14T22:47:21-04:00</updated>
 <id>https://xesscorp.github.io/pynqer/docs/_site/</id>
 <author>
   <name>XESS Corp.</name>
   <uri>https://xesscorp.github.io/pynqer/docs/_site/</uri>
   <email>pynqer@xess.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Ripping the Lid Off]]></title>
+  <link rel="alternate" type="text/html" href="https://xesscorp.github.io/pynqer/docs/_site/blog/ripping-the-lid-off"/>
+  <id>https://xesscorp.github.io/pynqer/docs/_site/blog/ripping_the_lid_off</id>
+  <published>2017-05-14T18:08:27-04:00</published>
+  <updated>2017-05-14T18:08:27-04:00</updated>
+  <author>
+    <name>XESS Corp.</name>
+    <uri>https://xesscorp.github.io/pynqer/docs/_site</uri>
+    <email>pynqer@xess.com</email>
+  </author>
+  
+  <content type="html">
+  
+    &lt;p&gt;The obvious place to start exploring PYNQ is to play with its buttons and LEDs.
+There’s already a &lt;a href=&quot;https://github.com/Xilinx/PYNQ/blob/master/Pynq-Z1/notebooks/examples/board_btns_leds.ipynb&quot;&gt;notebook&lt;/a&gt;
+for that so there’s no need for me to replicate it.
+A more interesting question is what’s going on underneath?
+So I’m going to rip the lid off the PYNQ software and start examining its innards.&lt;/p&gt;
+
+&lt;p&gt;A good starting point is the &lt;code class=&quot;highlighter-rouge&quot;&gt;pynq&lt;/code&gt; package:&lt;/p&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt input-prompt&quot;&gt;
+	
+		In
+        
+	[1]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pynq&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;You can find the source here:&lt;/p&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt input-prompt&quot;&gt;
+	
+		In
+        
+	[2]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;pynq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__path__&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt output-prompt&quot;&gt;
+	
+		Out
+        
+	[2]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;['/opt/python3.6/lib/python3.6/site-packages/pynq']&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;Overlay&lt;/code&gt; class in the &lt;code class=&quot;highlighter-rouge&quot;&gt;pynq&lt;/code&gt; package lets you specify a particular overlay that will be loaded into the Programmable Logic (PL) section of the ZYNQ chip.
+Xilinx has already provided a pre-compiled overlay that interfaces to the PYNQ’s buttons and LEDs (and other things):&lt;/p&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt input-prompt&quot;&gt;
+	
+		In
+        
+	[3]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;base&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pynq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Overlay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'base.bit'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;This reads in the bitstream for the overlay, but doesn’t yet load it into the PL.
+Let’s see what’s in it:&lt;/p&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt input-prompt&quot;&gt;
+	
+		In
+        
+	[4]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;nb&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt output-prompt&quot;&gt;
+	
+		Out
+        
+	[4]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;['__class__',
+ '__delattr__',
+ '__dict__',
+ '__dir__',
+ '__doc__',
+ '__eq__',
+ '__format__',
+ '__ge__',
+ '__getattribute__',
+ '__gt__',
+ '__hash__',
+ '__init__',
+ '__init_subclass__',
+ '__le__',
+ '__lt__',
+ '__module__',
+ '__ne__',
+ '__new__',
+ '__reduce__',
+ '__reduce_ex__',
+ '__repr__',
+ '__setattr__',
+ '__sizeof__',
+ '__str__',
+ '__subclasshook__',
+ '__weakref__',
+ '_bitfile_name',
+ '_gpio_dict',
+ '_host',
+ '_interrupt_controllers',
+ '_interrupt_pins',
+ '_ip_dict',
+ '_remote',
+ '_server',
+ '_timestamp',
+ 'bitfile_name',
+ 'bitstream',
+ 'client_request',
+ 'download',
+ 'gpio_dict',
+ 'interrupt_controllers',
+ 'interrupt_pins',
+ 'ip_dict',
+ 'is_loaded',
+ 'load_ip_data',
+ 'reset',
+ 'server_update',
+ 'setup']&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;From this, the actual location of the overlay bitstream is easily found:&lt;/p&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt input-prompt&quot;&gt;
+	
+		In
+        
+	[5]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bitfile_name&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt output-prompt&quot;&gt;
+	
+		Out
+        
+	[5]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;'/opt/python3.6/lib/python3.6/site-packages/pynq/bitstream/base.bit'&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;If you look in that directory, you’ll also see a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;base.tcl&lt;/code&gt;.
+This contains &lt;em&gt;a lot&lt;/em&gt; of information about the interface between the 
+PL and the Processing System (PS) where the PYNQ Python code runs.
+One of the things the &lt;code class=&quot;highlighter-rouge&quot;&gt;Overlay&lt;/code&gt; class does is search through this
+file, looking up all the interface information, and loading the
+necessary bits into dictionaries in the object it creates.&lt;/p&gt;
+
+&lt;p&gt;You would &lt;em&gt;think&lt;/em&gt; the &lt;code class=&quot;highlighter-rouge&quot;&gt;gpio_dict&lt;/code&gt; contains the information about accessing
+the LEDs and buttons on the PYNQ board. Let’s see:&lt;/p&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt input-prompt&quot;&gt;
+	
+		In
+        
+	[6]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gpio_dict&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt output-prompt&quot;&gt;
+	
+		Out
+        
+	[6]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;{'audio_path_sel': [3, None],
+ 'mb_1_intr_ack': [4, None],
+ 'mb_1_reset': [0, None],
+ 'mb_2_intr_ack': [5, None],
+ 'mb_2_reset': [1, None],
+ 'mb_3_intr_ack': [6, None],
+ 'mb_3_reset': [2, None]}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;Hmm, not quite what was expected.
+Looks like the reset and interrupt acknowledge pins are here, but nothing else.
+So the buttons and LEDs don’t have direct connections from the PL to the PS.
+Let’s try &lt;code class=&quot;highlighter-rouge&quot;&gt;ip_dict&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt input-prompt&quot;&gt;
+	
+		In
+        
+	[7]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ip_dict&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt output-prompt&quot;&gt;
+	
+		Out
+        
+	[7]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;{'SEG_axi_dma_0_Reg': [2151677952, 65536, None],
+ 'SEG_axi_dma_0_Reg1': [2151743488, 65536, None],
+ 'SEG_axi_dynclk_0_reg0': [1136721920, 65536, None],
+ 'SEG_axi_gpio_video_Reg': [1092747264, 65536, None],
+ 'SEG_axi_vdma_0_Reg': [1124073472, 65536, None],
+ 'SEG_btns_gpio_Reg': [1092681728, 65536, None],
+ 'SEG_d_axi_pdm_1_S_AXI_reg': [1136656384, 65536, None],
+ 'SEG_hdmi_out_hpd_video_Reg': [1092812800, 65536, None],
+ 'SEG_mb_bram_ctrl_1_Mem0': [1073741824, 65536, None],
+ 'SEG_mb_bram_ctrl_2_Mem0': [1107296256, 65536, None],
+ 'SEG_mb_bram_ctrl_3_Mem0': [1140850688, 65536, None],
+ 'SEG_rgbled_gpio_Reg': [1092878336, 65536, None],
+ 'SEG_swsleds_gpio_Reg': [1092616192, 65536, None],
+ 'SEG_system_interrupts_Reg': [1098907648, 65536, None],
+ 'SEG_trace_cntrl_0_Reg': [2210398208, 65536, None],
+ 'SEG_trace_cntrl_0_Reg2': [2210463744, 65536, None],
+ 'SEG_v_tc_0_Reg': [1136787456, 65536, None],
+ 'SEG_v_tc_1_Reg': [1136852992, 65536, None]}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;This is more helpful. There are entries that look related to the buttons (&lt;code class=&quot;highlighter-rouge&quot;&gt;SEG_btns_gpio_Reg&lt;/code&gt;), 
+LEDs (&lt;code class=&quot;highlighter-rouge&quot;&gt;SEG_swsleds_gpio_Reg&lt;/code&gt;), and RGB LEDs (&lt;code class=&quot;highlighter-rouge&quot;&gt;SEG_rgbled_gpio_Reg&lt;/code&gt;).
+But what do the entries mean?&lt;/p&gt;
+
+&lt;p&gt;Typing:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;help(base)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;provides some information about that (along with quite a bit of other stuff):&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Each entry of the IP dictionary is a mapping:
+ |  'name' -&amp;gt; [address, range, state]
+ |  
+ |  where
+ |  name (str) is the key of the entry.
+ |  address (int) is the base address of the IP.
+ |  range (int) is the address range of the IP.
+ |  state (str) is the state information about the IP.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This implies that reading the buttons or driving the LEDs is done using a read or write
+to a location within a bank of memory addresses.
+So the Python code for the buttons and LEDs must contain the instructions for what
+particular address offsets and bit locations are used.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://github.com/Xilinx/PYNQ/blob/master/python/pynq/board/button.py&quot;&gt;Python code for the buttons&lt;/a&gt; is stored in:&lt;/p&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt input-prompt&quot;&gt;
+	
+		In
+        
+	[8]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pynq.board.button&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;pynq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__file__&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt output-prompt&quot;&gt;
+	
+		Out
+        
+	[8]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;'/opt/python3.6/lib/python3.6/site-packages/pynq/board/button.py'&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;There are two important imports in there:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from pynq import MMIO
+from pynq import PL
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;MMIO&lt;/code&gt; class instantiates objects for reading and writing to a segment of memory, and
+the &lt;code class=&quot;highlighter-rouge&quot;&gt;PL&lt;/code&gt; is a singleton object that provides access to the dictionaries of whatever overlay is currently
+loaded into the PL of the ZYNQ.
+The &lt;code class=&quot;highlighter-rouge&quot;&gt;__init__&lt;/code&gt; method of a &lt;code class=&quot;highlighter-rouge&quot;&gt;Button&lt;/code&gt; object uses
+the &lt;code class=&quot;highlighter-rouge&quot;&gt;ip_dict&lt;/code&gt; of the &lt;code class=&quot;highlighter-rouge&quot;&gt;Overlay&lt;/code&gt; object to initialize an &lt;code class=&quot;highlighter-rouge&quot;&gt;MMIO&lt;/code&gt; object with the starting
+address and size of the address range for the buttons:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def __init__(self, index):
+        if Button._mmio is None:
+            Button._mmio = MMIO(PL.ip_dict[&quot;SEG_btns_gpio_Reg&quot;][0], 512)
+        self.index = index  # This is the bit position of a button in the memory word.
+        ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then the &lt;code class=&quot;highlighter-rouge&quot;&gt;Button&lt;/code&gt; object’s &lt;code class=&quot;highlighter-rouge&quot;&gt;read&lt;/code&gt; method will return a
+particular button’s current state by reading the memory word and masking-off the associated bit:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def read(self):
+    curr_val = Button._mmio.read()  # Read the 1st word of the memory range.
+    return (curr_val &amp;amp; (1 &amp;lt;&amp;lt; self.index)) &amp;gt;&amp;gt; self.index  # Mask off the bit for this button.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://github.com/Xilinx/PYNQ/blob/master/python/pynq/board/led.py&quot;&gt;Python code for the LED&lt;/a&gt;
+is very similar except that it writes a bit to the memory address to turn an LED on or off.
+(Except that the address for writing the LED values is offset by &lt;code class=&quot;highlighter-rouge&quot;&gt;0x8&lt;/code&gt; for some unknown reason
+that may become apparent later.)&lt;/p&gt;
+
+&lt;p&gt;So, if I understand this correctly, I should be able to explicitly use &lt;code class=&quot;highlighter-rouge&quot;&gt;MMIO&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;PL&lt;/code&gt; to write my own
+code for reading the state of a buttons and turning the LEDs on or off.
+The code in the following cell can be run and then (for a 10-second interval)
+the LED above each button on the PYNQ-Z1 will come on as long as that button is pushed.&lt;/p&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt input-prompt&quot;&gt;
+	
+		In
+        
+	[9]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pynq&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Overlay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MMIO&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;base&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Overlay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'base.bit'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;download&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;             &lt;span class=&quot;c&quot;&gt;# Load the PL of the ZYNQ with the bitstream for buttons &amp;amp; LEDs.&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Create MMIO objects for reading the buttons and turning the LEDs on and off.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;button_addr&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ip_dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'SEG_btns_gpio_Reg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;button_range&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ip_dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'SEG_btns_gpio_Reg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;button_mmio&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MMIO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button_addr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button_range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;led_addr&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ip_dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'SEG_swsleds_gpio_Reg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;led_range&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ip_dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'SEG_swsleds_gpio_Reg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;led_mmio&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MMIO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_addr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;led_range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# For a ten-second interval, read the values of all four buttons and&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# display it on all four of the LEDs.&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;buttons&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button_mmio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# Read memory word containing all four button values.&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;led_mmio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buttons&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;# Write button values to memory word driving all four LEDs.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;The same thing can be done using the higher-level PYNQ software:&lt;/p&gt;
+
+&lt;div class=&quot;cell&quot;&gt;
+	&lt;div class=&quot;prompt input-prompt&quot;&gt;
+	
+		In
+        
+	[10]:&lt;/div&gt;
+	
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pynq&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Overlay&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pynq.board.button&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Button&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pynq.board.led&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LED&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Create lists of the buttons and LEDs.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;buttons&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;leds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# For a ten-second interval, execute a loop to read the values of each button and&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# display it on the associated LED.&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;leds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buttons&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;Obviously, using the higher-level constructs makes the intent of the code clearer, so
+why bother with the low-level, explicit approach?
+&lt;em&gt;Because it shows how the magic is done!&lt;/em&gt;
+And I’ll need to recreate that magic when I build my own PL overlays and interface them to the PS.
+An understanding of the underlying code is necessary for that.&lt;/p&gt;
+
+&lt;p&gt;You’ll notice in &lt;code class=&quot;highlighter-rouge&quot;&gt;button.py&lt;/code&gt; that it includes some code for handling interrupts.
+I’ll start tinkering with those next.&lt;/p&gt;
+
+&lt;h2 id=&quot;pertinent-files&quot;&gt;Pertinent Files&lt;/h2&gt;
+
+&lt;p&gt;Here is a list of the files I examined while making this blog post:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/Xilinx/PYNQ/blob/master/Pynq-Z1/bitstream/base.bit&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;base.bit&lt;/code&gt;&lt;/a&gt;: 
+A bitstream that program the ZYNQ’s PL with a set of interfaces to the hardware on the PYNQ-Z1 board.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/Xilinx/PYNQ/blob/master/Pynq-Z1/bitstream/base.tcl&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;base.tcl&lt;/code&gt;&lt;/a&gt;: 
+Contains a set of definitions for register/memory addresses for the interfaces in the &lt;code class=&quot;highlighter-rouge&quot;&gt;base&lt;/code&gt; overlay.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/Xilinx/PYNQ/blob/master/python/pynq/pl.py&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pl.py&lt;/code&gt;&lt;/a&gt;: 
+Defines the classes for PL overlays (&lt;code class=&quot;highlighter-rouge&quot;&gt;PL_Meta&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;PL&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Bitstream&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Overlay&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/Xilinx/PYNQ/blob/master/python/pynq/mmio.py&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mmio.py&lt;/code&gt;&lt;/a&gt;: 
+Defines the &lt;code class=&quot;highlighter-rouge&quot;&gt;MMIO&lt;/code&gt; class for reading/writing a segment of memory.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/Xilinx/PYNQ/blob/master/python/pynq/board/button.py&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;button.py&lt;/code&gt;&lt;/a&gt;: 
+Defines the &lt;code class=&quot;highlighter-rouge&quot;&gt;Button&lt;/code&gt; class for reading the state of the pushbuttons on the PYNQ-Z1.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/Xilinx/PYNQ/blob/master/python/pynq/board/switch.py&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;switch.py&lt;/code&gt;&lt;/a&gt;: 
+Defines the &lt;code class=&quot;highlighter-rouge&quot;&gt;Switch&lt;/code&gt; class for reading the state of the slide switches on the PYNQ-Z1.
+(I didn’t use these in this post.)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/Xilinx/PYNQ/blob/master/python/pynq/board/led.py&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;led.py&lt;/code&gt;&lt;/a&gt;: 
+Defines the &lt;code class=&quot;highlighter-rouge&quot;&gt;LED&lt;/code&gt; class for changing the state of ON-OFF LEDs on the PYNQ-Z1.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/Xilinx/PYNQ/blob/master/python/pynq/board/rgbled.py&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rgbled.py&lt;/code&gt;&lt;/a&gt;: 
+Defines the &lt;code class=&quot;highlighter-rouge&quot;&gt;RGBLED&lt;/code&gt; class for changing the state of RGB LEDs on the PYNQ-Z1.
+(I didn’t use these in this post.)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/xesscorp/pynqer/tree/master/Notebooks/ripping_the_lid_off.ipynb&quot;&gt;This Jupyter notebook&lt;/a&gt;:
+Contains the executable notebook from which this post was generated.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+  
+  &lt;p&gt;&lt;a href=&quot;https://xesscorp.github.io/pynqer/docs/_site/blog/ripping-the-lid-off&quot;&gt;Ripping the Lid Off&lt;/a&gt; was originally published by XESS Corp. at &lt;a href=&quot;https://xesscorp.github.io/pynqer/docs/_site&quot;&gt;PYNQer&lt;/a&gt; on May 14, 2017.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>

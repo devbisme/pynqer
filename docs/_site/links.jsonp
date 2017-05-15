@@ -8,6 +8,11 @@ callback([
   {
     "text": "Reading the Docs",
     "href": "https://xesscorp.github.io/pynqer/docs/_site/blog/reading-the-docs"
+  } ,
+
+  {
+    "text": "Ripping the Lid Off",
+    "href": "https://xesscorp.github.io/pynqer/docs/_site/blog/ripping-the-lid-off"
   } 
 
 ])

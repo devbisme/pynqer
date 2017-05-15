@@ -820,3 +820,54 @@ iframe {
     font-size: 1.125rem !important;
     font-weight: normal !important;
 }
+
+
+
+/* Stuff for Jupyter notebooks in Jekyll blogs */
+
+div.cell {
+    margin: 0 auto 0 auto;
+    width: 56.25rem;
+    page-break-inside: auto;
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: horizontal;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: horizontal;
+    box-align: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+
+.prompt {
+  min-width: 10ex;
+  padding: 0em;
+  margin: 0px 3px 0px -10ex;
+  font-family: monospace;
+  font-size: 14px;    
+  text-align: left;
+  line-height: 1.21429em;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+  white-space: nowrap;
+}
+
+.input-prompt {
+    color: #303F9F;
+}
+
+.output-prompt {
+    color: #D84315;
+}
+
+/***************************************************/
