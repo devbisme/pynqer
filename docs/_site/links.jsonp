@@ -13,6 +13,11 @@ callback([
   {
     "text": "Ripping the Lid Off",
     "href": "https://xesscorp.github.io/pynqer/docs/_site/blog/ripping-the-lid-off"
+  } ,
+
+  {
+    "text": "Introductory Interrupts",
+    "href": "https://xesscorp.github.io/pynqer/docs/_site/blog/introductory-interrupts"
   } 
 
 ])

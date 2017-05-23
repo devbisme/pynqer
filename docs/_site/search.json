@@ -1,6 +1,14 @@
 [
 	
 		{
+		  "title"      : "Introductory Interrupts",
+		  "category"   : "blog",
+		  "url"        : "https://xesscorp.github.io/pynqer/docs/_site/blog/introductory-interrupts",
+		  "date"       : "2017-05-23 10:31:28 -0400",
+		  "shortdate"  : "May 23, 2017"
+		} ,
+	
+		{
 		  "title"      : "Ripping the Lid Off",
 		  "category"   : "blog",
 		  "url"        : "https://xesscorp.github.io/pynqer/docs/_site/blog/ripping-the-lid-off",
