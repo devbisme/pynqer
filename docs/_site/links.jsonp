@@ -2,22 +2,22 @@ callback([
 
   {
     "text": "PYNQ Setup",
-    "href": "https://xesscorp.github.io/pynqer/docs/_site/blog/pynq-setup"
+    "href": "https://devbisme.github.io/pynqer/docs/_site/blog/pynq-setup"
   } ,
 
   {
     "text": "Reading the Docs",
-    "href": "https://xesscorp.github.io/pynqer/docs/_site/blog/reading-the-docs"
+    "href": "https://devbisme.github.io/pynqer/docs/_site/blog/reading-the-docs"
   } ,
 
   {
     "text": "Ripping the Lid Off",
-    "href": "https://xesscorp.github.io/pynqer/docs/_site/blog/ripping-the-lid-off"
+    "href": "https://devbisme.github.io/pynqer/docs/_site/blog/ripping-the-lid-off"
   } ,
 
   {
     "text": "Introductory Interrupts",
-    "href": "https://xesscorp.github.io/pynqer/docs/_site/blog/introductory-interrupts"
+    "href": "https://devbisme.github.io/pynqer/docs/_site/blog/introductory-interrupts"
   } 
 
 ])

@@ -3,7 +3,7 @@
 		{
 		  "title"      : "Introductory Interrupts",
 		  "category"   : "blog",
-		  "url"        : "https://xesscorp.github.io/pynqer/docs/_site/blog/introductory-interrupts",
+		  "url"        : "https://devbisme.github.io/pynqer/docs/_site/blog/introductory-interrupts",
 		  "date"       : "2017-05-23 10:31:28 -0400",
 		  "shortdate"  : "May 23, 2017"
 		} ,
@@ -11,7 +11,7 @@
 		{
 		  "title"      : "Ripping the Lid Off",
 		  "category"   : "blog",
-		  "url"        : "https://xesscorp.github.io/pynqer/docs/_site/blog/ripping-the-lid-off",
+		  "url"        : "https://devbisme.github.io/pynqer/docs/_site/blog/ripping-the-lid-off",
 		  "date"       : "2017-05-14 18:08:27 -0400",
 		  "shortdate"  : "May 14, 2017"
 		} ,
@@ -19,7 +19,7 @@
 		{
 		  "title"      : "Reading the Docs",
 		  "category"   : "blog",
-		  "url"        : "https://xesscorp.github.io/pynqer/docs/_site/blog/reading-the-docs",
+		  "url"        : "https://devbisme.github.io/pynqer/docs/_site/blog/reading-the-docs",
 		  "date"       : "2017-04-22 14:04:30 -0400",
 		  "shortdate"  : "April 22, 2017"
 		} ,
@@ -27,7 +27,7 @@
 		{
 		  "title"      : "PYNQ Setup",
 		  "category"   : "blog",
-		  "url"        : "https://xesscorp.github.io/pynqer/docs/_site/blog/pynq-setup",
+		  "url"        : "https://devbisme.github.io/pynqer/docs/_site/blog/pynq-setup",
 		  "date"       : "2017-04-04 12:25:39 -0400",
 		  "shortdate"  : "April 04, 2017"
 		} 

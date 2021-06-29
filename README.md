@@ -26,7 +26,7 @@ With these components, it's possible to quickly experiment with various
 coprocessors and see how they interact with the ARM by using the Jupyter
 environment to control the PYNQ board and query the results of computations.
 
-[This site](http://xesscorp.github.io/pynqer) will record my experiences as I explore the PYNQ system.
+[This site](http://devbisme.github.io/pynqer) will record my experiences as I explore the PYNQ system.
 I don't intend this as a tutorial on using Zynq or Pynq: there are
 plenty of those already and I'll reference them as needed.
 Rather, I'll use these posts to tamp the things I learn about PYNQ into my
@@ -36,4 +36,4 @@ the design files in the Github repository.
 Feel free to use them as they become available: everything is open source.
 
 
-* Website: [http://xesscorp.github.io/pynqer](http://xesscorp.github.io/pynqer)
+* Website: [http://devbisme.github.io/pynqer](http://devbisme.github.io/pynqer)
